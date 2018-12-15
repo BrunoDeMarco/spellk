@@ -31,7 +31,7 @@ function preload() {
 
 function create() {
 
-    map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
+    var map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
     var tileset = map.addTilesetImage('tiles');
 
     var layer = map.createStaticLayer(0, tileset, 0, 320);
