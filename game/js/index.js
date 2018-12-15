@@ -51,6 +51,34 @@ var MainScene = new Phaser.Class({
 
 });
 
+var EndScene = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function EndScene ()
+    {
+        Phaser.Scene.call(this, { key: 'endScene' });
+    },
+
+    preload: function ()
+    {
+        this.load.image('end_game', '../assets/end_game.png');
+    },
+
+    create: function ()
+    {
+        this.add.sprite(300, 200, 'end_game');
+        this.input.once('pointerdown', function()
+        {
+            console.log('change scene');
+            this.scene.start('endScene');
+        }, this);
+    }
+
+});
+
 const config = {
   type: Phaser.AUTO,
   width: 800,
@@ -66,7 +94,7 @@ const config = {
     create: create,
     update: update
   }
-  // scene: [ MenuScene, MainScene ]
+  // scene: [ MenuScene, MainScene, EndScene ]
 };
 
 var anim;
