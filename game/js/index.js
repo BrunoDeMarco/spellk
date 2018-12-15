@@ -1,5 +1,51 @@
 import Phaser from "phaser";
 
+var MenuScene = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function MenuScene ()
+    {
+        Phaser.Scene.call(this, { key: 'menuScene' });
+    },
+
+    preload: function ()
+    {
+        console.log('preload');
+    },
+
+    create: function ()
+    {
+        console.log('create');
+    }
+
+});
+
+var MainScene = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function MainScene ()
+    {
+        Phaser.Scene.call(this, { key: 'mainScene' });
+    },
+
+    preload: function ()
+    {
+        console.log('preload');
+    },
+
+    create: function ()
+    {
+        console.log('create');
+    }
+
+});
+
 const config = {
   type: Phaser.AUTO,
   width: 800,
