@@ -23,37 +23,45 @@ var progress;
 var frameView;
 
 function preload() {
-  //this.load.image('tileset', 'assets/tileset.png');
-  this.load.spritesheet("hero", "assets/hero/rogue_like_run.png", {
-    frameWidth: 100,
-    frameHeight: 100
-  });
+    this.load.image('tiles', 'assets/tileset.png');
+    this.load.tilemapCSV('map', 'assets/tileset.csv');
+
+    this.load.spritesheet('hero', 'assets/hero/rogue_like_run.png', { frameWidth: 100, frameHeight: 100 });
 }
 
 function create() {
-  var config = {
-    key: "walk",
-    frames: this.anims.generateFrameNumbers("hero"),
-    frameRate: 6,
-    yoyo: false,
-    repeat: -1
-  };
 
-  anim = this.anims.create(config);
-  sprite = this.add.sprite(400, 300, "hero").setScale(2);
-  sprite.anims.load("walk");
+    map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
+    var tileset = map.addTilesetImage('tiles');
 
-  this.input.keyboard.on("keydown_RIGHT", function(event) {
-    sprite.anims.play("walk");
-  });
+    var layer = map.createStaticLayer(0, tileset, 0, 320);
 
-  this.input.keyboard.on("keydown_P", function(event) {
-    if (sprite.anims.isPaused) {
-      sprite.anims.resume();
-    } else {
-      sprite.anims.pause();
-    }
-  });
+    var config = {
+        key: 'walk',
+        frames: this.anims.generateFrameNumbers('hero'),
+        frameRate: 6,
+        yoyo: false,
+        repeat: -1
+    };
+
+    anim = this.anims.create(config);
+    sprite = this.add.sprite(400, 300, 'hero').setScale(2);
+    sprite.anims.load('walk');
+    
+    this.input.keyboard.on('keydown_RIGHT', function (event) {
+        sprite.anims.play('walk');
+    });
+
+    this.input.keyboard.on('keydown_P', function (event) {
+        if (sprite.anims.isPaused)
+        {
+            sprite.anims.resume();
+        }
+        else
+        {
+            sprite.anims.pause();
+        }
+    });
 }
 
 function update() {}
