@@ -4,7 +4,9 @@
   "description": "Game Hacka 2018",
   "main": "index.js",
   "scripts": {
-    "start": "http-server ."
+    "start": "http-server .",
+    "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "webpack --config ./webpack.config.js --mode production"
   },
   "author": "Bruno de Marco",
   "license": "MIT",
@@ -12,6 +14,14 @@
     "phaser": "^3.15.1"
   },
   "devDependencies": {
-    "http-server": "^0.11.1"
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   }
 }
