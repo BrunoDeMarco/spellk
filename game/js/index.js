@@ -7,8 +7,8 @@ import EndScene from "./scenes/endScene";
 
 const config = {
   type: Phaser.AUTO,
-  width: 1000,
-  height: 600,
+  width: 448,
+  height: 448,
   physics: {
     default: "arcade",
     arcade: {
