@@ -23,11 +23,18 @@ var progress;
 var frameView;
 
 function preload() {
-    //this.load.image('tileset', 'assets/tileset.png');
+    this.load.image('tiles', 'assets/tileset.png');
+    this.load.tilemapCSV('map', 'assets/tileset.csv');
+
     this.load.spritesheet('hero', 'assets/hero/rogue_like_run.png', { frameWidth: 100, frameHeight: 100 });
 }
 
 function create() {
+
+    map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
+    var tileset = map.addTilesetImage('tiles');
+
+    var layer = map.createStaticLayer(0, tileset, 0, 320);
 
     var config = {
         key: 'walk',
