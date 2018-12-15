@@ -13,12 +13,17 @@ var MenuScene = new Phaser.Class({
 
     preload: function ()
     {
-        console.log('preload');
+        this.load.image('menu_background', '../assets/menu_background.png');
     },
 
     create: function ()
     {
-        console.log('create');
+        this.add.sprite(300, 200, 'menu_background');
+        this.input.once('pointerdown', function()
+        {
+            console.log('change scene');
+            this.scene.start('mainScene');
+        }, this);
     }
 
 });
@@ -61,6 +66,7 @@ const config = {
     create: create,
     update: update
   }
+  // scene: [ MenuScene, MainScene ]
 };
 
 var anim;
