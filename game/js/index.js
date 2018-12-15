@@ -15,11 +15,6 @@ const config = {
       gravity: { y: 200 }
     }
   },
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  },
   scene: [ MenuScene, MainScene, EndScene, HeroScene ]
 };
 
