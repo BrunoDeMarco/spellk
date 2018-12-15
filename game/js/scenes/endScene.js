@@ -1,20 +1,11 @@
 class EndScene extends Phaser.Scene {
+  constructor() {
+    super({ key: "endScene" });
+  }
 
-    constructor()
-    {
-        super({ key:'endScene', active: true});
-    }
+  preload() {}
 
-    preload()
-    {
-
-    }
-
-    create()
-    {
-
-    }
-
-};
+  create() {}
+}
 
 export default EndScene;
