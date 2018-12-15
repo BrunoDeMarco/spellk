@@ -1,64 +1,77 @@
 class MainScene extends Phaser.Scene {
   constructor() {
-    super({ key: "mainScene", active: true });
+    super({ key: "mainScene" });
+    this.player = null;
   }
 
   preload() {
-    this.load.image("tile", "assets/scene/tile.png");
-    this.load.image("tile_interno", "assets/scene/tile_interno.png");
-    this.load.image("tile_random", "assets/scene/tile_random.png");
-
-    // this.load.tilemapCSV("map", "assets/tileset.csv");
+    this.load.image('ground', 'assets/scene/ground.png');
+    this.load.spritesheet('hero', 'assets/hero/rogue_like_run.png', {
+       frameWidth: 32,
+       frameHeight: 48
+     });
   }
 
   create() {
-    // var map = this.make.tilemap({ key: "tiles", tileWidth: 16, tileHeight: 16 });
-    // var tileset = map.addTilesetImage("tiles");
 
-    let colunas = 5;
-    let linhas = 5;
-
-    for (var i = -1; i < colunas + 1; i++)
-    {
-
-      for (var j = -1; j < linhas + 1; j++)
-      {
-        if (i == -1 || i == colunas || j == -1 || j == linhas)
-        {
-          this.add.sprite(i * 64 + 96, j * 64 + 96, "tile");
-        }
-        else
-        {
-          this.add.sprite(i * 64 + 96, j * 64 + 96, "tile_interno");
-        }
-          
-      }
-      
-    }
-
-    var grid = [];
-
-    for (let i = 1; i <= colunas - 1; i++)
-    {
-      for (let j = 1; j <= linhas - 1; j++)
-      {
-        grid.push([i,j]);
-      }
-    }
-
-    let random_count = Math.floor(Math.random() * 10);
-
-    for (let i = 0; i < random_count; i++)
-    {
-      let random = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-      this.add.sprite(grid[random][0] * 64 + 96, grid[random][1] * 64 + 96, "tile_random");
-    }
+    const ground = this.physics.add.staticGroup();
     
+    ground.create(100, 300, 'ground');
+    ground.create(30, 200, 'ground');
+    ground.create(100, 300, 'ground');
 
-    // map.setCollisionBetween(200, 400);
-    // var tileset = map.addTilesetImage("tiles");
+    this.player = this.physics.add.sprite(100, 100, 'hero').setScale(1);
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
 
-    // var layer = map.createStaticLayer(0, tileset, 0, 320);
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('hero', { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'turn',
+      frames: [ { key: 'hero', frame: 4 } ],
+      frameRate: 20
+    });
+  
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('hero', { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.physics.add.collider(this.player, ground);
+  }
+
+  update() {
+
+    const controller = this.input.keyboard.createCursorKeys();
+
+    if (controller.left.isDown)
+    {
+      this.player.setVelocityX(-160);
+      this.player.anims.play('left', true);
+    }
+    else if (controller.right.isDown)
+    {
+      this.player.setVelocityX(160);
+      this.player.anims.play('right', true);
+    }
+    else
+    {
+      this.player.setVelocityX(0);
+      this.player.anims.play('turn');
+    }
+
+    if (controller.up.isDown && this.player.body.touching.down)
+    {
+      this.player.setVelocityY(-230);
+    }
+
   }
 }
 

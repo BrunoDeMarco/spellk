@@ -7,15 +7,15 @@ import EndScene from "./scenes/endScene";
 
 const config = {
   type: Phaser.AUTO,
-  width: 448,
-  height: 448,
+  width: 480,
+  height: 480,
   physics: {
     default: "arcade",
     arcade: {
       gravity: { y: 200 }
     }
   },
-  scene: [MenuScene, MainScene, EndScene, HeroScene]
+  scene: [ MainScene ]
 };
 
 export default new Phaser.Game(config);
